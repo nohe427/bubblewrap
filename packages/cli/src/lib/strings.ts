@@ -16,12 +16,14 @@
 
 import {Fingerprint} from '@bubblewrap/core';
 import {cyan, green, underline, bold, italic, red, yellow} from 'colors';
+import { directory } from 'mock-fs';
 
 type Messages = {
   errorAssetLinksGeneration: string;
   errorCouldNotfindTwaManifest: (file: string) => string;
   errorDirectoryDoesNotExist: (directory: string) => string;
   errorFailedToRunQualityCriteria: string;
+  errorIconUrlMustExist: (manifest: string) => string;
   errorPlayBillingEnableNotifications: string;
   errorPlayBillingAlphaDependencies: string;
   errorMaxLength: (maxLength: number, actualLength: number) => string;
@@ -132,6 +134,9 @@ export const enUS: Messages = {
   },
   errorDirectoryDoesNotExist: (directory: string): string => {
     return `Cannot write to directory: ${directory}.`;
+  },
+  errorIconUrlMustExist: (manifest: string): string => {
+    return `iconUrl field is missing from ${manifest}. Please add an iconUrl to continue.`;
   },
   errorFailedToRunQualityCriteria:
       yellow('\nFailed to run the PWA Quality Criteria checks. Skipping.'),

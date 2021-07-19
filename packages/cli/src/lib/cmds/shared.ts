@@ -134,6 +134,11 @@ export async function updateProject(
     return false;
   }
   
+  // Check that the iconUrl exists.
+  if (!twaManifest.iconUrl) {
+    throw new Error(messages.errorIconUrlMustExist(manifestFile));
+  }
+
   // Check that the iconUrl is valid.
   if (twaManifest.iconUrl) {
     const result = await validateImageUrl(twaManifest.iconUrl);
